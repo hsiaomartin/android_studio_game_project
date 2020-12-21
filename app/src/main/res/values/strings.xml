@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">APP</string>
+    <string name="main_text">weeeee</string>
+    <string name="gameRule">
+        <h1>1.設置牌面\n</h1>
+            >遊戲共有40張卡片，A、B、C、D籌碼各7個\n
+            >先在場上開出4張卡片\n
+       2. 遊戲開始\n
+        a.隨機一位玩家做為第一位，之後依照順時鐘執行遊戲\n
+        b.玩家每回合僅能執行以下3種動作中的其中1個，玩家手中籌碼總和上限為10個，卡片數則不限\n
+            ①拿3個不同顏色的籌碼\n
+            ②拿2個相同顏色的籌碼，若該種籌碼少於2個，僅能執行①\n
+            ③當自身籌碼充足(手上籌碼 + 可永久減免的籌碼數)，即可購買卡片，需支付卡片標註的籌碼數，便可獲得該卡片\n
+        c.將牌面補齊4張卡片\n
+        d.當任意玩家卡片分數總合≧ 8 時，遊戲結束\n
+        e.輪到下一位從動作b.開始\n
+    </string>
+    <string name="gameName">Game</string>
+    <string name="title_activity_game_over">gameOverActivity</string>
+</resources>
