@@ -58,4 +58,15 @@ public class Card {
     public short getNeed_PointD() {
         return need_PointD;
     }
+
+    public String getCard_Picture() {
+        return card_Picture;
+    }
+
+    public boolean card_Is_Available(short point_A,short point_B,short point_C,short point_D){
+        if((point_A>=need_PointA)&&(point_B>=need_PointB)&&(point_C>=need_PointC)&&(point_D>=need_PointD))
+            return true;
+        else
+            return false;
+    }
 }

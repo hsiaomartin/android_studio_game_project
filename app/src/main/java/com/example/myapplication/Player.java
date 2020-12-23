@@ -9,7 +9,7 @@ public class Player {
     private short need_PointA = 0;
     private short need_PointB = 0;
     private short need_PointC = 0;
-    private short need_PointD = 0;
+    private short need_PointD = 0 ;
     private short hand_limit = 10;
     private String player_Name;
     public Player(String name){

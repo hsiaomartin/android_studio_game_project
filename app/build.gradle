@@ -3,7 +3,13 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    sourceSets {
+        main {
 
+            assets.srcDirs = ['/res/raw']
+
+        }
+    }
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdkVersion 14
@@ -34,3 +40,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }
+
