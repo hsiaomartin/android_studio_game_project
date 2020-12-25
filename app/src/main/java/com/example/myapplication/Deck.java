@@ -14,24 +14,19 @@ public class Deck {
 
     public Deck(InputStreamReader isr){
         this.cards = new ArrayList<>();
+        //讀取卡組數據
         getDeckData(isr);
+        //產生卡組
         generateDeck();
+        //卡組洗牌
         shuffle_Deck();
     }
+
 
     public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public void generateDeck(){
-        String[] tokens = (sb.toString()).split(" ");
-        for (int i = 0 ; i<tokens.length ; i++) {
-            String token = tokens[i];
-            cards.add(new Card(token,"@mipmap/c"+i));
-            //System.out.println("value : "+(getCards().get(i)).getCard_Score());
-        }
-
-    }
     public void getDeckData(InputStreamReader isr){
         String line;
         BufferedReader br = new BufferedReader(isr);
@@ -44,6 +39,17 @@ public class Deck {
             e.printStackTrace();
         }
     }
+
+    public void generateDeck(){
+        String[] tokens = (sb.toString()).split(" ");
+        for (int i = 0 ; i<tokens.length ; i++) {
+            String token = tokens[i];
+            cards.add(new Card(token,"@mipmap/c"+i));
+            //System.out.println("value : "+(getCards().get(i)).getCard_Score());
+        }
+
+    }
+
     public void shuffle_Deck(){
         Collections.shuffle(cards);
     }

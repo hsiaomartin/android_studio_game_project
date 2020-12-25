@@ -1,53 +1,53 @@
 package com.example.myapplication;
 
 public class Player {
-    private short player_Score = 0;
-    private short permanent_PointA = 0;
-    private short permanent_PointB = 0;
-    private short permanent_PointC = 0;
-    private short permanent_PointD = 0;
-    private short need_PointA = 0;
-    private short need_PointB = 0;
-    private short need_PointC = 0;
-    private short need_PointD = 0 ;
-    private short hand_limit = 10;
+    private int player_Score = 0;
+    private int permanent_PointA = 0;
+    private int permanent_PointB = 0;
+    private int permanent_PointC = 0;
+    private int permanent_PointD = 0;
+    private int need_PointA = 0;
+    private int need_PointB = 0;
+    private int need_PointC = 0;
+    private int need_PointD = 0;
+    private int hand_limit = 10;
     private String player_Name;
     public Player(String name){
         player_Name = name;
     }
-    public short getPlayer_Score() {
+    public int getPlayer_Score() {
         return player_Score;
     }
 
-    public short getPermanent_PointA() {
+    public int getPermanent_PointA() {
         return permanent_PointA;
     }
 
-    public short getPermanent_PointB() {
+    public int getPermanent_PointB() {
         return permanent_PointB;
     }
 
-    public short getPermanent_PointC() {
+    public int getPermanent_PointC() {
         return permanent_PointC;
     }
 
-    public short getPermanent_PointD() {
+    public int getPermanent_PointD() {
         return permanent_PointD;
     }
 
-    public short getNeed_PointA() {
+    public int getNeed_PointA() {
         return need_PointA;
     }
 
-    public short getNeed_PointB() {
+    public int getNeed_PointB() {
         return need_PointB;
     }
 
-    public short getNeed_PointC() {
+    public int getNeed_PointC() {
         return need_PointC;
     }
 
-    public short getNeed_PointD() {
+    public int getNeed_PointD() {
         return need_PointD;
     }
 
@@ -55,35 +55,35 @@ public class Player {
         return player_Name;
     }
 
-    public void setNeed_PointA(short need_PointA) {
+    public void setNeed_PointA(int need_PointA) {
         this.need_PointA = need_PointA;
     }
 
-    public void setNeed_PointB(short need_PointB) {
+    public void setNeed_PointB(int need_PointB) {
         this.need_PointB = need_PointB;
     }
 
-    public void setNeed_PointC(short need_PointC) {
+    public void setNeed_PointC(int need_PointC) {
         this.need_PointC = need_PointC;
     }
 
-    public void setNeed_PointD(short need_PointD) {
+    public void setNeed_PointD(int need_PointD) {
         this.need_PointD = need_PointD;
     }
 
-    public void setPermanent_PointA(short permanent_PointA) {
+    public void setPermanent_PointA(int permanent_PointA) {
         this.permanent_PointA = permanent_PointA;
     }
 
-    public void setPermanent_PointB(short permanent_PointB) {
+    public void setPermanent_PointB(int permanent_PointB) {
         this.permanent_PointB = permanent_PointB;
     }
 
-    public void setPermanent_PointC(short permanent_PointC) {
+    public void setPermanent_PointC(int permanent_PointC) {
         this.permanent_PointC = permanent_PointC;
     }
 
-    public void setPermanent_PointD(short permanent_PointD) {
+    public void setPermanent_PointD(int permanent_PointD) {
         this.permanent_PointD = permanent_PointD;
     }
 
@@ -91,7 +91,7 @@ public class Player {
         this.player_Name = player_Name;
     }
 
-    public void setPlayer_Score(short player_Score) {
+    public void setPlayer_Score(int player_Score) {
         this.player_Score = player_Score;
     }
 
