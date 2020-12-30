@@ -51,6 +51,19 @@ public class Player {
         return need_PointD;
     }
 
+    public int getResourceA(){
+        return need_PointA+permanent_PointA;
+    }
+    public int getResourceB(){
+        return need_PointB+permanent_PointB;
+    }
+    public int getResourceC(){
+        return need_PointC+permanent_PointC;
+    }
+    public int getResourceD(){
+        return need_PointD+permanent_PointD;
+    }
+
     public String getPlayer_Name() {
         return player_Name;
     }

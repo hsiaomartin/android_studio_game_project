@@ -44,7 +44,7 @@ public class Deck {
         String[] tokens = (sb.toString()).split(" ");
         for (int i = 0 ; i<tokens.length ; i++) {
             String token = tokens[i];
-            cards.add(new Card(token,"@mipmap/c"+i));
+            cards.add(new Card(token,"@mipmap/c"+i,"c"+i));
             //System.out.println("value : "+(getCards().get(i)).getCard_Score());
         }
 

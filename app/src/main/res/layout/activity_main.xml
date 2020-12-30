@@ -672,8 +672,7 @@
                 android:id="@+id/textView_flip_Card_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -692,14 +691,13 @@
                 android:background="#FFFFFF"
                 android:onClick="on_flip_Card1_Clicked"
                 android:scaleType="fitXY"
-                android:src="@mipmap/coin_a" />
+                android:src="@mipmap/c7" />
 
             <TextView
                 android:id="@+id/textView_flip_Card_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -718,14 +716,13 @@
                 android:background="#FFFFFF"
                 android:onClick="on_flip_Card2_Clicked"
                 android:scaleType="fitXY"
-                android:src="@mipmap/coin_a" />
+                android:src="@mipmap/c8" />
 
             <TextView
                 android:id="@+id/textView_flip_Card_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -744,14 +741,13 @@
                 android:background="#FFFFFF"
                 android:onClick="on_flip_Card3_Clicked"
                 android:scaleType="fitXY"
-                android:src="@mipmap/coin_a" />
+                android:src="@mipmap/c9" />
 
             <TextView
                 android:id="@+id/textView_flip_Card_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
 
         </LinearLayout>
     </LinearLayout>
@@ -782,7 +778,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="3" />
+                android:text="7" />
         </LinearLayout>
 
         <LinearLayout
@@ -797,7 +793,8 @@
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@mipmap/coin_b" />
+                android:background="@mipmap/coin_b"
+                android:onClick="on_button_coinB_Clicked" />
 
             <TextView
                 android:id="@+id/coinB_TextView"
@@ -805,7 +802,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="8" />
+                android:text="7" />
         </LinearLayout>
 
         <LinearLayout
@@ -820,7 +817,8 @@
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@mipmap/coin_c" />
+                android:background="@mipmap/coin_c"
+                android:onClick="on_button_coinC_Clicked" />
 
             <TextView
                 android:id="@+id/coinC_TextView"
@@ -828,7 +826,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="0" />
+                android:text="7" />
         </LinearLayout>
 
         <LinearLayout
@@ -843,7 +841,8 @@
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@mipmap/coin_d" />
+                android:background="@mipmap/coin_d"
+                android:onClick="on_button_coinD_Clicked" />
 
             <TextView
                 android:id="@+id/coinD_TextView"
@@ -851,61 +850,92 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="6" />
+                android:text="7" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView_Deck"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@mipmap/card_stack" />
+        <ImageButton
+            android:id="@+id/chosen_Card"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/c_null" />
 
-        <TextView
-            android:id="@+id/textView_deck_Counter"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="x23"
-            android:textSize="24sp" />
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/button_Hand1"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:srcCompat="@mipmap/coin_null" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/button_Hand2"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:srcCompat="@mipmap/coin_null" />
+                <ImageView
+                    android:id="@+id/imageView_Deck"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/card_stack" />
 
-        <ImageButton
-            android:id="@+id/button_Hand3"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:srcCompat="@mipmap/coin_null" />
+                <TextView
+                    android:id="@+id/textView_deck_Counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="x23"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/button_Hand1"
+                        android:layout_width="57dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        tools:srcCompat="@mipmap/coin_null" />
+
+                    <ImageButton
+                        android:id="@+id/button_Hand2"
+                        android:layout_width="57dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        tools:srcCompat="@mipmap/coin_null" />
+
+                    <ImageButton
+                        android:id="@+id/button_Hand3"
+                        android:layout_width="57dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        tools:srcCompat="@mipmap/coin_null" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/action_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:onClick="on_test_ButtonClicked"
+
+                android:text="Debug" />
+
+        </LinearLayout>
+
     </LinearLayout>
-
-    <Button
-        android:id="@+id/action_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="on_test_ButtonClicked"
-        android:text="Debug" />
 
 
 </LinearLayout>
