@@ -15,6 +15,21 @@
         d.當任意玩家卡片分數總合≧ 8 時，遊戲結束\n
         e.輪到下一位從動作b.開始\n
     </string>
-    <string name="gameName">Game</string>
+    <string name="player_Status_Text">
+        玩家食材和分數
+    </string>
+    <string name="Card_Select_Text">
+        可製作的料理
+    </string>
+    <string name="coin_Select_Text">
+        可拿取的食材
+    </string>
+    <string name="player_Select_Text">
+        玩家購物籃
+    </string>
+    <string name="deck_Text">
+        剩餘的料理
+    </string>
+    <string name="gameName">阿嬤買菜</string>
     <string name="title_activity_game_over">gameOverActivity</string>
 </resources>

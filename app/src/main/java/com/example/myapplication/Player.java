@@ -10,7 +10,7 @@ public class Player {
     private int need_PointB = 0;
     private int need_PointC = 0;
     private int need_PointD = 0;
-    private int hand_limit = 10;
+    private int hand_limit = (gameMethod.getHand_Coin_Limit());
     private String player_Name;
     public Player(String name){
         player_Name = name;
@@ -64,6 +64,8 @@ public class Player {
         return need_PointD+permanent_PointD;
     }
 
+    public int getTotal_Need_Point(){return need_PointA + need_PointB + need_PointC + need_PointD; }
+
     public String getPlayer_Name() {
         return player_Name;
     }
@@ -108,12 +110,13 @@ public class Player {
         this.player_Score = player_Score;
     }
 
+
     //檢查玩家手上籌碼有無超出持有籌碼上限
     public boolean is_Over_Limit(){
         if((need_PointA+need_PointB+need_PointC+need_PointD)>hand_limit){
-            return false;
+            return true;
         }
         else
-            return true;
+            return false;
     }
 }

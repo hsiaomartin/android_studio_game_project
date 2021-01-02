@@ -13,6 +13,7 @@ public class Card {
     private int need_PointD;
     private String card_Picture;
     private String card_Name;
+    private String food_Name;
     /*
     封包格式:
     共有 9 種資料 [8:0] card_Data
@@ -30,7 +31,7 @@ public class Card {
     消耗籌碼ABCD總和為3~5
      */
 
-    public Card(String card_Info,String card_Picture,String card_Name){
+    public Card(String card_Info,String card_Picture,String card_Name,String food_Name){
         card_Data = card_Info;
         card_Score =  (int)(card_Info.charAt(0)-'0');
         permanent_PointA = (int)(card_Info.charAt(1)-'0');
@@ -43,6 +44,7 @@ public class Card {
         need_PointD = (int)(card_Info.charAt(8)-'0');
         this.card_Picture = card_Picture;
         this.card_Name = card_Name;
+        this.food_Name = food_Name;
     }
 
     public String getCard_Data() {
@@ -94,6 +96,8 @@ public class Card {
     public String getCard_Name() {
         return card_Name;
     }
+
+    public String getFood_Name(){return food_Name;}
 
     public boolean card_Is_Available(int point_A, int point_B, int point_C, int point_D){
         if((point_A>=need_PointA)&&(point_B>=need_PointB)&&(point_C>=need_PointC)&&(point_D>=need_PointD))

@@ -20,26 +20,31 @@
                 android:layout_height="wrap_content"
                 android:text="@string/gameRule" />
 
-            <ImageView
-                android:id="@+id/imageView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:foreground="@mipmap/game_rule_1"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:foreground="@mipmap/game_rule_2"
-                tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/game_rule_1" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/game_rule_2" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_Game_Help"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:onClick="on_Button_Return_Menu"
                 android:text="ok" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -18,7 +18,7 @@ public class gameOverActivity extends AppCompatActivity {
         return_Menu = (Button)findViewById(R.id.button_Return_Menu);
         winner = (TextView)findViewById(R.id.textView_Winner);
         Intent intent = getIntent();
-        winner.setText(String.format("%s is winner !", intent.getStringExtra("winner")));
+        winner.setText(String.format("%s 是贏家 !", intent.getStringExtra("winner")));
     }
     public void button_Return_Menu(View button) {
         Intent intent = new Intent(this,gameStart.class);
