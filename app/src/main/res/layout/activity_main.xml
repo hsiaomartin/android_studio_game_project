@@ -668,6 +668,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#FFF3E0"
             android:orientation="vertical">
 
             <ImageButton
@@ -698,6 +699,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#C8E6C9"
             android:orientation="vertical">
 
             <ImageButton
@@ -728,6 +730,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#FCE4EC"
             android:orientation="vertical">
 
             <ImageButton
@@ -758,6 +761,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#E0F2F1"
             android:orientation="vertical">
 
             <ImageButton
@@ -933,7 +937,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#B2EBF2">
+            android:background="#F6E6E6">
 
             <LinearLayout
                 android:id="@+id/deck_Remain"
@@ -945,7 +949,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:background="#F8EDED"
+                android:background="#E8EAF6"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -978,7 +982,7 @@
                     android:id="@+id/textView_deck_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFF3E0"
+                    android:background="#E3F2FD"
                     android:gravity="center"
                     android:text="@string/deck_Text"
                     android:textColor="#9E7F57"
@@ -1011,7 +1015,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFF3E0"
+                    android:background="#E3F2FD"
                     android:gravity="center"
                     android:text="製作的料理"
                     android:textColor="#9E7F57"
@@ -1028,7 +1032,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_toStartOf="@+id/action_Button"
                 android:layout_toLeftOf="@+id/action_Button"
-                android:background="#E1F5FE"
+                android:background="#E8EAF6"
                 android:text="玩家提示" />
 
             <Button
@@ -1113,7 +1117,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFF3E0"
+                    android:background="#E3F2FD"
                     android:gravity="center"
                     android:text="拿取的食材"
                     android:textColor="#9E7F57"

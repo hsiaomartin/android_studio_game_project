@@ -230,10 +230,10 @@ public class MainActivity extends AppCompatActivity {
             textView_Player_Score[i].setText(String.format("%s/%s", player[i].getPlayer_Score(), WIN_SCORE));
         }
 
-        player[0].setPlayer_Name("桂香");//阿嬤
-        player[1].setPlayer_Name("石英");//外婆
-        player[2].setPlayer_Name("梨月");
-        player[3].setPlayer_Name("春桃");
+        player[0].setPlayer_Name("");
+        player[1].setPlayer_Name("");
+        player[2].setPlayer_Name("");
+        player[3].setPlayer_Name("");
 
         //更新介面上的名字，食材總數
         for (int i = 0 ;i<PLAYER_NUM;i++){
@@ -415,8 +415,7 @@ public class MainActivity extends AppCompatActivity {
     //取消耗籌碼A
     public void on_button_coinA_Clicked(View ImageButton){
         int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"A");//檢查玩家預計拿的籌碼是否正常(同樣籌碼超過2)
-
+        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"A",coin_Limit[0]);//檢查玩家預計拿的籌碼是否正常
         //如果沒拿卡片，且籌碼堆還有消耗籌碼A，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼A
         if (card_Taken_No == -1 && coin_Limit[0]>0 &&  player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[0]<2 && (valid_Taken==0) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
                 int imageResource = getResources().getIdentifier("@mipmap/coin_a", null, getPackageName());
@@ -443,6 +442,8 @@ public class MainActivity extends AppCompatActivity {
                 msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
             else if( valid_Taken == 2)
                 msg = ("您不能拿取 2 個相同的籌碼");
+            else if(valid_Taken == 3)
+                msg = ("該籌碼堆不足 4 個，無法再次拿取");
             //更新介面提示文字
             textView_hint_message.setText(msg);
         }
@@ -450,7 +451,7 @@ public class MainActivity extends AppCompatActivity {
     //取籌碼B
     public void on_button_coinB_Clicked(View ImageButton){
         int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"B");//檢查玩家預計拿的籌碼是否正常(同樣籌碼超過2)
+        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"B",coin_Limit[1]);//檢查玩家預計拿的籌碼是否正常
 
         //如果沒拿卡片，且籌碼堆還有消耗籌碼B，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼B
         if (card_Taken_No == -1 && coin_Limit[1]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[1]<2 && (valid_Taken == 0 ) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
@@ -477,6 +478,8 @@ public class MainActivity extends AppCompatActivity {
                 msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
             else if( valid_Taken == 2)
                 msg = ("您不能拿取 2 個相同的籌碼");
+            else if(valid_Taken == 3)
+                msg = ("該籌碼堆不足 4 個，無法再次拿取");
             //更新介面提示文字
             textView_hint_message.setText(msg);
         }
@@ -484,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
     //取籌碼C
     public void on_button_coinC_Clicked(View ImageButton){
         int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"C");//檢查玩家預計拿的籌碼是否正常(同樣籌碼超過2)
+        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"C",coin_Limit[2]);//檢查玩家預計拿的籌碼是否正常
 
         //如果沒拿卡片，且籌碼堆還有消耗籌碼C，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼C
         if (card_Taken_No == -1 && coin_Limit[2]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[2]<2 && (valid_Taken == 0) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
@@ -511,6 +514,8 @@ public class MainActivity extends AppCompatActivity {
                 msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
             else if( valid_Taken == 2)
                 msg = ("您不能拿取 2 個相同的籌碼");
+            else if(valid_Taken == 3)
+                msg = ("該籌碼堆不足 4 個，無法再次拿取");
             //更新介面提示文字
             textView_hint_message.setText(msg);
         }
@@ -518,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
     //取籌碼D
     public void on_button_coinD_Clicked(View ImageButton){
         int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"D");//檢查玩家預計拿的籌碼是否正常(同樣籌碼超過2)
+        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"D",coin_Limit[3]);//檢查玩家預計拿的籌碼是否正常
 
         //如果沒拿卡片，且籌碼堆還有消耗籌碼D，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿籌碼
         if (card_Taken_No == -1 && coin_Limit[3]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[3]<2 && (valid_Taken == 0 ) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
@@ -545,6 +550,8 @@ public class MainActivity extends AppCompatActivity {
                 msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
             else if( valid_Taken == 2)
                 msg = ("您不能拿取 2 個相同的籌碼");
+            else if(valid_Taken == 3)
+                msg = ("該籌碼堆不足 4 個，無法再次拿取");
             //更新介面提示文字
             textView_hint_message.setText(msg);
         }
@@ -564,12 +571,7 @@ public class MainActivity extends AppCompatActivity {
             player[player_Pointer].setNeed_PointD( player[player_Pointer].getNeed_PointD() + need_Coin_Taken[3] );
         }
         else if(card_Taken_No != -1){
-            //如果是拿卡片當作回合動作，更新獲取的永久籌碼，以及分數
-            player[player_Pointer].setPermanent_PointA( player[player_Pointer].getPermanent_PointA() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointA() );
-            player[player_Pointer].setPermanent_PointB( player[player_Pointer].getPermanent_PointB() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointB() );
-            player[player_Pointer].setPermanent_PointC( player[player_Pointer].getPermanent_PointC() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointC() );
-            player[player_Pointer].setPermanent_PointD( player[player_Pointer].getPermanent_PointD() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointD() );
-            player[player_Pointer].setPlayer_Score( player[player_Pointer].getPlayer_Score() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getCard_Score() );
+            //如果是拿卡片當作回合動作
 
             //更新玩家手中的消耗籌碼
             //如果手中的永久籌碼數量少於要消耗掉的籌碼，減少玩家手中的消耗籌碼，並將消耗籌碼歸還且更新介面
@@ -598,6 +600,13 @@ public class MainActivity extends AppCompatActivity {
                 coin_Limit[3] +=( (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointD() - player[player_Pointer].getPermanent_PointD());
                 textView_coin[3].setText(String.valueOf(coin_Limit[3]));
             }
+
+            //更新獲取的永久籌碼，以及分數
+            player[player_Pointer].setPermanent_PointA( player[player_Pointer].getPermanent_PointA() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointA() );
+            player[player_Pointer].setPermanent_PointB( player[player_Pointer].getPermanent_PointB() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointB() );
+            player[player_Pointer].setPermanent_PointC( player[player_Pointer].getPermanent_PointC() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointC() );
+            player[player_Pointer].setPermanent_PointD( player[player_Pointer].getPermanent_PointD() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointD() );
+            player[player_Pointer].setPlayer_Score( player[player_Pointer].getPlayer_Score() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getCard_Score() );
         }
 
 
