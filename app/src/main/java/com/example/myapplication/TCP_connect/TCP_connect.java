@@ -1,18 +1,6 @@
 package com.example.myapplication.TCP_connect;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.example.myapplication.R;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,38 +10,44 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ActivityClient extends AppCompatActivity {
-    private Thread thread;
+public class TCP_connect {
+    private static Thread thread;
+    private static Thread send_Thread;
     private Socket clientSocket;//客戶端的socket
     private BufferedWriter bw;  //取得網路輸出串流
     private BufferedReader br;  //取得網路輸入串流
+    String IP,Name;
+    int Port;
 
-    private String send_msg;
+    String send_msg;
+    String server_msg;
 
-    TextView tv;
-    TextView title;
-    /*public void send_str(){
+    public TCP_connect(String ip,int port,String userName){
+        IP = ip;
+        Port = port;
+        Name = userName;
+        send_msg = Name + " info";
+
+
+
+
+        //thread=new Thread(Connection);
+        //thread.start();
+        Log.d("connect start","IP : "+IP + ", Port : "+Port +", Name : "+ Name);
+        /*
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                send_str(send_msg);
+            }
+        }).start();
+
+         */
+        //send_Thread = new Thread(send_str,send_msg);
+        //send_Thread.start();
 
     }
-
-     */
-    /*
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bn_connect:
-                connect();
-                break;
-            case R.id.bn_send:
-                sendStr();
-                break;
-            case R.id.tx_receive:
-                clear();
-                break;
-        }
-    }
-    */
-
-    public void send(String str){
+    public void send_str(String str){
         String s = str;
         try {
             bw.write(s+"\n");
@@ -65,7 +59,21 @@ public class ActivityClient extends AppCompatActivity {
         }
     }
 
-    public String receive_str(BufferedReader br) throws IOException {
+    public String get_Msg(){
+        if(server_msg!=null){
+            String msg = server_msg;
+            server_msg="";
+            return msg;
+        }
+        else
+            return "";
+    }
+
+    public void send_Msg(String s){
+        send_msg = s;
+    }
+
+    private String receive_str(BufferedReader br) throws IOException {
         //https://stackoverflow.com/questions/5694998/bufferedreader-values-into-char-array
         char[] tmp  =new char[1024];
         int str_end = (br.read(tmp,0,1024));
@@ -80,65 +88,29 @@ public class ActivityClient extends AppCompatActivity {
         return filter_str.toString();
     }
 
-    private void refreshUI(final String msg) {
-        runOnUiThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        tv.setText(msg);
-                    }
-                });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client);
-        tv = (TextView) findViewById(R.id.textView3);
-        send_msg = "5 中文";
-
-        Button send = (Button) findViewById(R.id.button);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        send(send_msg);
-                    }
-                }).start();
-            }
-        });
-
-        thread=new Thread(Connection);
-        thread.start();
-    }
-
     //連結socket伺服器做傳送與接收
-    private Runnable Connection=new Runnable(){
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
+    public void Connection(){
+          // TODO Auto-generated method stub
             try{
                 //輸入 Server 端的 IP
-                InetAddress serverIp = InetAddress.getByName("140.117.168.167");
+                InetAddress serverIp = InetAddress.getByName(IP);
                 //InetAddress serverIp = InetAddress.getByName("10.0.2.2");
                 //自訂所使用的 Port(1024 ~ 65535)
-                int serverPort = 8888;
+                int serverPort = Port;
                 //建立連線
                 clientSocket = new Socket(serverIp, serverPort);
                 //取得網路輸出串流
                 bw = new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream()));
                 //取得網路輸入串流
                 br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
+                send_str(send_msg);
                 //檢查是否已連線
                 while (clientSocket.isConnected()) {
                     //宣告一個緩衝,從br串流讀取 Server 端傳來的訊息
 
                     final String get_msg = receive_str(br);
                     if(get_msg!=null){
-                        refreshUI(get_msg);
+                        server_msg = get_msg;
                         Log.d("get from server : ", String.valueOf(get_msg.length())+" : "+get_msg);
 
                     }
@@ -147,23 +119,16 @@ public class ActivityClient extends AppCompatActivity {
                 //當斷線時會跳到 catch,可以在這裡處理斷開連線後的邏輯
                 e.printStackTrace();
                 Log.e("text","Socket連線="+e.toString());
-                finish();    //當斷線時自動關閉 Socket
             }
         }
-    };
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+
+    public void destroy() {
+        //super.onDestroy();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //傳送離線 Action 給 Server 端
-                    //jsonWrite = new JSONObject();
-                    //jsonWrite.put("action","離線");
-                    //寫入
-                    //bw.write(jsonWrite + "\n");
                     bw.write("exit\n");
                     //立即發送
                     bw.flush();

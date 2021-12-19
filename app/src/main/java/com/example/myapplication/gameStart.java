@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.TCP_connect.ActivityClient;
+import com.example.myapplication.TCP_connect.ActivityTcpInitial;
 
 public class gameStart extends AppCompatActivity {
     Button game_Start;
@@ -31,7 +32,7 @@ public class gameStart extends AppCompatActivity {
     }
 
     public void button_Game_Start(View button) {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,Activity_setup.class);
         startActivity(intent);
     }
     public void button_Game_Help(View button) {
@@ -44,7 +45,7 @@ public class gameStart extends AppCompatActivity {
         game_Connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ActivityClient.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityTcpInitial.class);
                 startActivity(intent);
             }
         });

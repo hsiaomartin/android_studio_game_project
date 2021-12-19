@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class Deck {
     private ArrayList<Card> cards;
-    private int deck_Num = 40;
+    public static int deck_Num = 40;
     StringBuilder sb = new StringBuilder();
     StringBuilder sb_Food_Name = new StringBuilder();
     public Deck(InputStreamReader isr_Card_Name,InputStreamReader isr_Food_Name){
@@ -70,4 +70,13 @@ public class Deck {
     public void shuffle_Deck(){
         Collections.shuffle(cards);
     }
+    public void shuffle_Deck(int random[]){
+        ArrayList<Card> temp_cards = new ArrayList<>();
+        for (int i = 0 ; i<deck_Num;i++){
+
+            temp_cards.add(cards.get(random[i]));
+        }
+        cards = temp_cards;
+    }
+
 }
