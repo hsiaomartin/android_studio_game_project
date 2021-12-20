@@ -12,6 +12,7 @@ public class Player {
     private int need_PointD = 0;
     private int hand_limit = (gameMethod.getHand_Coin_Limit());
     private String player_Name;
+    public int seq_num;
     public Player(String name){
         player_Name = name;
     }
@@ -68,6 +69,13 @@ public class Player {
 
     public String getPlayer_Name() {
         return player_Name;
+    }
+
+    public void setPlayer_seq_num(int sequence) {
+       seq_num = sequence;
+    }
+    public int getPlayer_seq_num() {
+        return seq_num;
     }
 
     public void setNeed_PointA(int need_PointA) {

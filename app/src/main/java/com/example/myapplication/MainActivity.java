@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String multi_mode = "multi";
     String current_mode = single_mode;
     Bundle extras;
+
     //-遊戲參數------------
     int PLAYER_NUM=4; //玩家人數
     int FLIP_CARD_NUM = 4 ;//翻開的卡片數量
@@ -72,25 +73,10 @@ public class MainActivity extends AppCompatActivity {
     TextView[] textView_Player_Score; //玩家分數
     TextView[] textView_Player_Name;
 
-    TextView textView_Player1_A_resource;
-    TextView textView_Player1_B_resource;
-    TextView textView_Player1_C_resource;
-    TextView textView_Player1_D_resource;
-
-    TextView textView_Player2_A_resource;
-    TextView textView_Player2_B_resource;
-    TextView textView_Player2_C_resource;
-    TextView textView_Player2_D_resource;
-
-    TextView textView_Player3_A_resource;
-    TextView textView_Player3_B_resource;
-    TextView textView_Player3_C_resource;
-    TextView textView_Player3_D_resource;
-
-    TextView textView_Player4_A_resource;
-    TextView textView_Player4_B_resource;
-    TextView textView_Player4_C_resource;
-    TextView textView_Player4_D_resource;
+    TextView[] textView_Player_A_resource = new TextView[PLAYER_NUM];
+    TextView[] textView_Player_B_resource = new TextView[PLAYER_NUM];
+    TextView[] textView_Player_C_resource = new TextView[PLAYER_NUM];
+    TextView[] textView_Player_D_resource = new TextView[PLAYER_NUM];
 
     TextView[] textView_Player_Total_Res;//玩家手上持有的消耗籌碼總數
 
@@ -140,45 +126,46 @@ public class MainActivity extends AppCompatActivity {
         textView_Player_Score[2] = (TextView) findViewById(R.id.playerC_Score);
         textView_Player_Score[3] = (TextView) findViewById(R.id.playerD_Score);
 
-        textView_Player1_A_resource = (TextView)findViewById(R.id.p1A_resource);
-        textView_Player1_B_resource = (TextView)findViewById(R.id.p1B_resource);
-        textView_Player1_C_resource = (TextView)findViewById(R.id.p1C_resource);
-        textView_Player1_D_resource = (TextView)findViewById(R.id.p1D_resource);
+        textView_Player_A_resource[0] = (TextView)findViewById(R.id.p1A_resource);
+        textView_Player_B_resource[0] = (TextView)findViewById(R.id.p1B_resource);
+        textView_Player_C_resource[0] = (TextView)findViewById(R.id.p1C_resource);
+        textView_Player_D_resource[0] = (TextView)findViewById(R.id.p1D_resource);
 
-        textView_Player2_A_resource = (TextView)findViewById(R.id.p2A_resource);
-        textView_Player2_B_resource = (TextView)findViewById(R.id.p2B_resource);
-        textView_Player2_C_resource = (TextView)findViewById(R.id.p2C_resource);
-        textView_Player2_D_resource = (TextView)findViewById(R.id.p2D_resource);
+        textView_Player_A_resource[1] = (TextView)findViewById(R.id.p2A_resource);
+        textView_Player_B_resource[1] = (TextView)findViewById(R.id.p2B_resource);
+        textView_Player_C_resource[1] = (TextView)findViewById(R.id.p2C_resource);
+        textView_Player_D_resource[1] = (TextView)findViewById(R.id.p2D_resource);
 
-        textView_Player3_A_resource = (TextView)findViewById(R.id.p3A_resource);
-        textView_Player3_B_resource = (TextView)findViewById(R.id.p3B_resource);
-        textView_Player3_C_resource = (TextView)findViewById(R.id.p3C_resource);
-        textView_Player3_D_resource = (TextView)findViewById(R.id.p3D_resource);
+        textView_Player_A_resource[2] = (TextView)findViewById(R.id.p3A_resource);
+        textView_Player_B_resource[2] = (TextView)findViewById(R.id.p3B_resource);
+        textView_Player_C_resource[2] = (TextView)findViewById(R.id.p3C_resource);
+        textView_Player_D_resource[2] = (TextView)findViewById(R.id.p3D_resource);
 
-        textView_Player4_A_resource = (TextView)findViewById(R.id.p4A_resource);
-        textView_Player4_B_resource = (TextView)findViewById(R.id.p4B_resource);
-        textView_Player4_C_resource = (TextView)findViewById(R.id.p4C_resource);
-        textView_Player4_D_resource = (TextView)findViewById(R.id.p4D_resource);
+        textView_Player_A_resource[3] = (TextView)findViewById(R.id.p4A_resource);
+        textView_Player_B_resource[3] = (TextView)findViewById(R.id.p4B_resource);
+        textView_Player_C_resource[3] = (TextView)findViewById(R.id.p4C_resource);
+        textView_Player_D_resource[3] = (TextView)findViewById(R.id.p4D_resource);
 
-        textView_Player1_A_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player1_B_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player1_C_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player1_D_resource.setText(Html.fromHtml(resource_Initial));
+        textView_Player_A_resource[0].setText(Html.fromHtml(resource_Initial));
+        textView_Player_B_resource[0].setText(Html.fromHtml(resource_Initial));
+        textView_Player_C_resource[0].setText(Html.fromHtml(resource_Initial));
+        textView_Player_D_resource[0].setText(Html.fromHtml(resource_Initial));
 
-        textView_Player2_A_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player2_B_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player2_C_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player2_D_resource.setText(Html.fromHtml(resource_Initial));
+        textView_Player_A_resource[1].setText(Html.fromHtml(resource_Initial));
+        textView_Player_B_resource[1].setText(Html.fromHtml(resource_Initial));
+        textView_Player_C_resource[1].setText(Html.fromHtml(resource_Initial));
+        textView_Player_D_resource[1].setText(Html.fromHtml(resource_Initial));
 
-        textView_Player3_A_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player3_B_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player3_C_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player3_D_resource.setText(Html.fromHtml(resource_Initial));
+        textView_Player_A_resource[2].setText(Html.fromHtml(resource_Initial));
+        textView_Player_B_resource[2].setText(Html.fromHtml(resource_Initial));
+        textView_Player_C_resource[2].setText(Html.fromHtml(resource_Initial));
+        textView_Player_D_resource[2].setText(Html.fromHtml(resource_Initial));
 
-        textView_Player4_A_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player4_B_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player4_C_resource.setText(Html.fromHtml(resource_Initial));
-        textView_Player4_D_resource.setText(Html.fromHtml(resource_Initial));
+        textView_Player_A_resource[3].setText(Html.fromHtml(resource_Initial));
+        textView_Player_B_resource[3].setText(Html.fromHtml(resource_Initial));
+        textView_Player_C_resource[3].setText(Html.fromHtml(resource_Initial));
+        textView_Player_D_resource[3].setText(Html.fromHtml(resource_Initial));
+
 
         textView_Flip_Card = new TextView[FLIP_CARD_NUM];
         textView_Flip_Card[0] = (TextView) findViewById(R.id.textView_flip_Card_1);
@@ -230,9 +217,7 @@ public class MainActivity extends AppCompatActivity {
         deck_Pointer = new int[FLIP_CARD_NUM];
         player_Pointer = 0; //指向目前動作的玩家，初始化預設指向第一位玩家
         card_Taken_No = -1; //被拿取的卡片代號
-        for(int i = 0 ;i< FLIP_CARD_NUM ;i++){
-            deck_Counter_Value--;
-        }
+
 
 
 
@@ -323,6 +308,14 @@ public class MainActivity extends AppCompatActivity {
             player[2].setPlayer_Name(extras.getString("player3"));
             player[3].setPlayer_Name(extras.getString("player4"));
         }
+        else if(current_mode.equals(multi_mode)){
+            player[0].setPlayer_Name("");
+            player[1].setPlayer_Name("");
+            player[2].setPlayer_Name("");
+            player[3].setPlayer_Name("");
+
+            //player name will refresh in receive
+        }
 
 
         //更新介面上的名字，食材總數
@@ -330,42 +323,47 @@ public class MainActivity extends AppCompatActivity {
             textView_Player_Name[i].setText(player[i].getPlayer_Name());
             textView_Player_Total_Res[i].setText(String.valueOf(player[i].getTotal_Need_Point()));
         }
+        if(current_mode.equals(single_mode)) {
+            for(int i = 0 ;i< FLIP_CARD_NUM ;i++){
+                deck_Counter_Value--;
+            }
+            //牌面初始化
+            for(int i = 0 ; i< 4 ;i++){
+                //從洗好的牌堆中，將第 0~3 中的卡片圖示拿出
+                int imageResource = getResources().getIdentifier((myDeck.getCards().get(i)).getCard_Picture(), null, getPackageName());
+                flip_Card[i].setImageResource(imageResource);
+                //將卡片數值提示文字設定在卡片可拿取位置
+                textView_Flip_Card[i].setText((myDeck.getCards().get(i)).getFood_Name());
+                //卡片可拿取位置設定從牌堆中拿取的新卡片
+                deck_Pointer[i] = i;
+                //deck_Index指向牌堆中的下一張卡片
+                deck_Index++;
+            }
 
-
-
-        //new DataThread().start();
-
-        //牌面初始化
-        for(int i = 0 ; i< 4 ;i++){
-            //從洗好的牌堆中，將第 0~3 中的卡片圖示拿出
-            int imageResource = getResources().getIdentifier((myDeck.getCards().get(i)).getCard_Picture(), null, getPackageName());
-            flip_Card[i].setImageResource(imageResource);
-            //將卡片數值提示文字設定在卡片可拿取位置
-            textView_Flip_Card[i].setText((myDeck.getCards().get(i)).getFood_Name());
-            //卡片可拿取位置設定從牌堆中拿取的新卡片
-            deck_Pointer[i] = i;
-            //deck_Index指向牌堆中的下一張卡片
-            deck_Index++;
+            player_Pointer = (int) (Math.random() * (3 - 0 + 1));//隨機一位玩家作為初始玩家
+            textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);//初始玩家標記為紅色
+            show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+            textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
         }
-        player_Pointer = (int) (Math.random() * (3 - 0 + 1));//隨機一位玩家作為初始玩家
-        textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);//初始玩家標記為紅色
-
 
         deck_Counter.setText("x"+String.valueOf(deck_Counter_Value));
-        textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+    }
+
+    public void action_hint(int pointer){
+        System.out.println("card "+(pointer+1)+" clicked : score = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getCard_Score());
+        System.out.println("card "+(pointer+1)+" clicked : A = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getPermanent_PointA());
+        System.out.println("card "+(pointer+1)+" clicked : B = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getPermanent_PointB());
+        System.out.println("card "+(pointer+1)+" clicked : C = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getPermanent_PointC());
+        System.out.println("card "+(pointer+1)+" clicked : D = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getPermanent_PointD());
+        System.out.println("card "+(pointer+1)+" clicked : A = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getNeed_PointA());
+        System.out.println("card "+(pointer+1)+" clicked : B = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getNeed_PointB());
+        System.out.println("card "+(pointer+1)+" clicked : C = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getNeed_PointC());
+        System.out.println("card "+(pointer+1)+" clicked : D = "+ (myDeck.getCards().get(deck_Pointer[pointer])).getNeed_PointD());
     }
 
     public void on_flip_Card0_Clicked(View ImageButton){
         if(MY_DEBUG){
-            System.out.println("card 1 clicked : score = "+ (myDeck.getCards().get(deck_Pointer[0])).getCard_Score());
-            System.out.println("card 1 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[0])).getPermanent_PointA());
-            System.out.println("card 1 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[0])).getPermanent_PointB());
-            System.out.println("card 1 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[0])).getPermanent_PointC());
-            System.out.println("card 1 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[0])).getPermanent_PointD());
-            System.out.println("card 1 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[0])).getNeed_PointA());
-            System.out.println("card 1 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[0])).getNeed_PointB());
-            System.out.println("card 1 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[0])).getNeed_PointC());
-            System.out.println("card 1 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[0])).getNeed_PointD());
+            action_hint(0);
         }
 
         //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
@@ -397,15 +395,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void on_flip_Card1_Clicked(View ImageButton){
         if(MY_DEBUG){
-            System.out.println("card 2 clicked : score = "+ (myDeck.getCards().get(deck_Pointer[1])).getCard_Score());
-            System.out.println("card 2 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[1])).getPermanent_PointA());
-            System.out.println("card 2 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[1])).getPermanent_PointB());
-            System.out.println("card 2 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[1])).getPermanent_PointC());
-            System.out.println("card 2 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[1])).getPermanent_PointD());
-            System.out.println("card 2 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[1])).getNeed_PointA());
-            System.out.println("card 2 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[1])).getNeed_PointB());
-            System.out.println("card 2 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[1])).getNeed_PointC());
-            System.out.println("card 2 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[1])).getNeed_PointD());
+            action_hint(1);
         }
         //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
         boolean card_Available =(myDeck.getCards().get(deck_Pointer[1])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
@@ -435,15 +425,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void on_flip_Card2_Clicked(View ImageButton){
         if(MY_DEBUG){
-            System.out.println("card 3 clicked : score = "+ (myDeck.getCards().get(deck_Pointer[2])).getCard_Score());
-            System.out.println("card 3 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[2])).getPermanent_PointA());
-            System.out.println("card 3 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[2])).getPermanent_PointB());
-            System.out.println("card 3 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[2])).getPermanent_PointC());
-            System.out.println("card 3 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[2])).getPermanent_PointD());
-            System.out.println("card 3 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[2])).getNeed_PointA());
-            System.out.println("card 3 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[2])).getNeed_PointB());
-            System.out.println("card 3 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[2])).getNeed_PointC());
-            System.out.println("card 3 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[2])).getNeed_PointD());
+            action_hint(2);
         }
         //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
         boolean card_Available =(myDeck.getCards().get(deck_Pointer[2])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
@@ -473,15 +455,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void on_flip_Card3_Clicked(View ImageButton){
         if(MY_DEBUG){
-            System.out.println("card 4 clicked : score = "+ (myDeck.getCards().get(deck_Pointer[3])).getCard_Score());
-            System.out.println("card 4 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[3])).getPermanent_PointA());
-            System.out.println("card 4 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[3])).getPermanent_PointB());
-            System.out.println("card 4 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[3])).getPermanent_PointC());
-            System.out.println("card 4 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[3])).getPermanent_PointD());
-            System.out.println("card 4 clicked : A = "+ (myDeck.getCards().get(deck_Pointer[3])).getNeed_PointA());
-            System.out.println("card 4 clicked : B = "+ (myDeck.getCards().get(deck_Pointer[3])).getNeed_PointB());
-            System.out.println("card 4 clicked : C = "+ (myDeck.getCards().get(deck_Pointer[3])).getNeed_PointC());
-            System.out.println("card 4 clicked : D = "+ (myDeck.getCards().get(deck_Pointer[3])).getNeed_PointD());
+            action_hint(3);
         }
         //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
         boolean card_Available = (myDeck.getCards().get(deck_Pointer[3])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
@@ -668,11 +642,8 @@ public class MainActivity extends AppCompatActivity {
     //用來 debug 的 button
     public void on_test_ButtonClicked(View button) {
         if(current_mode.equals(multi_mode)){
-            send_Msg="token aaa aaa aaaww wwee ee";
-            //切換開關在Client模式時
-            if (tcpClient == null)return;
-            if (send_Msg.length() == 0 || !tcpClient.getStatus()) return;
-            exec.execute(() -> tcpClient.send(send_Msg));
+            send_Msg = "nothing ha ha";
+            int token[]=new int[4];
             //如果是拿籌碼當作回合動作
             if (coin_Taken_Counter > 0) {
                 //將拿取的籌碼數紀錄，數量為 (原本手上數量 + 本回合拿取數量)
@@ -680,9 +651,12 @@ public class MainActivity extends AppCompatActivity {
                 player[player_Pointer].setNeed_PointB(player[player_Pointer].getNeed_PointB() + need_Coin_Taken[1]);
                 player[player_Pointer].setNeed_PointC(player[player_Pointer].getNeed_PointC() + need_Coin_Taken[2]);
                 player[player_Pointer].setNeed_PointD(player[player_Pointer].getNeed_PointD() + need_Coin_Taken[3]);
-            } else if (card_Taken_No != -1) {
+                token =new int[]{player[player_Pointer].getNeed_PointA(),player[player_Pointer].getNeed_PointB(),player[player_Pointer].getNeed_PointC(),player[player_Pointer].getNeed_PointD()};
+                send_Msg="token ";
+            }
+            else if (card_Taken_No != -1) {
                 //如果是拿卡片當作回合動作
-
+                send_Msg =String.format("card %s ",card_Taken_No);
                 //更新玩家手中的消耗籌碼
                 //如果手中的永久籌碼數量少於要消耗掉的籌碼，減少玩家手中的消耗籌碼，並將消耗籌碼歸還且更新介面
                 if (player[player_Pointer].getPermanent_PointA() < (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointA()) {
@@ -725,35 +699,14 @@ public class MainActivity extends AppCompatActivity {
             String update_Player_ResourceB = "<b><tt>" + player[player_Pointer].getResourceB() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointB() + ")";
             String update_Player_ResourceC = "<b><tt>" + player[player_Pointer].getResourceC() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointC() + ")";
             String update_Player_ResourceD = "<b><tt>" + player[player_Pointer].getResourceD() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointD() + ")";
-            if (player_Pointer == 0) {
-                textView_Player_Total_Res[0].setText(String.valueOf(player[0].getTotal_Need_Point()));
-                textView_Player_Score[0].setText(String.format("%s/%s", player[0].getPlayer_Score(), WIN_SCORE));
-                textView_Player1_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player1_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player1_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player1_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 1) {
-                textView_Player_Total_Res[1].setText(String.valueOf(player[1].getTotal_Need_Point()));
-                textView_Player_Score[1].setText(String.format("%s/%s", player[1].getPlayer_Score(), WIN_SCORE));
-                textView_Player2_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player2_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player2_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player2_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 2) {
-                textView_Player_Total_Res[2].setText(String.valueOf(player[2].getTotal_Need_Point()));
-                textView_Player_Score[2].setText(String.format("%s/%s", player[2].getPlayer_Score(), WIN_SCORE));
-                textView_Player3_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player3_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player3_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player3_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 3) {
-                textView_Player_Total_Res[3].setText(String.valueOf(player[3].getTotal_Need_Point()));
-                textView_Player_Score[3].setText(String.format("%s/%s", player[3].getPlayer_Score(), WIN_SCORE));
-                textView_Player4_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player4_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player4_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player4_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            }
+
+            textView_Player_Total_Res[player_Pointer].setText(String.valueOf(player[player_Pointer].getTotal_Need_Point()));
+            textView_Player_Score[player_Pointer].setText(String.format("%s/%s", player[player_Pointer].getPlayer_Score(), WIN_SCORE));
+            textView_Player_A_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceA));
+            textView_Player_B_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceB));
+            textView_Player_C_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceC));
+            textView_Player_D_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceD));
+
             //將被拿取位置的卡片補上新抽的卡片
             if (card_Taken_No != -1) {
                 //從洗好的牌堆中，將第 deck_Index 中的卡片圖示拿出
@@ -775,7 +728,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            coin_Taken_Counter = 0;//拿取得消耗籌碼總數歸零
+
             card_Taken_No = -1;//將拿去的卡片初始化
 
             // 將介面上，手中拿去的消耗籌碼圖案更新為空白
@@ -789,8 +742,15 @@ public class MainActivity extends AppCompatActivity {
                 if (need_Coin_Taken[i] > 0) {
                     //coin_Limit[i] -=need_Coin_Taken[i];
                     textView_coin[i].setText(String.valueOf(coin_Limit[i]));
+
                 }
+                if(coin_Taken_Counter>0)
+                    send_Msg+= coin_Limit[i]+" ";
             }
+            if(coin_Taken_Counter>0)
+                send_Msg += String.format("%s %s %s %s ", token[0], token[1], token[2], token[3]);
+
+            coin_Taken_Counter = 0;//拿取得消耗籌碼總數歸零
 
             //將本回合拿取的消耗籌碼數歸零
             for (int i = 0; i < 4; i++) {
@@ -813,7 +773,16 @@ public class MainActivity extends AppCompatActivity {
                 textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
             textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
             show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
-            //textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+            textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+
+
+
+
+            //切換開關在Client模式時
+            if (tcpClient == null)return;
+            if (send_Msg.length() == 0 || !tcpClient.getStatus()) return;
+            exec.execute(() -> tcpClient.send(send_Msg));
+
         }
         else {
 
@@ -870,35 +839,14 @@ public class MainActivity extends AppCompatActivity {
             String update_Player_ResourceB = "<b><tt>" + player[player_Pointer].getResourceB() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointB() + ")";
             String update_Player_ResourceC = "<b><tt>" + player[player_Pointer].getResourceC() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointC() + ")";
             String update_Player_ResourceD = "<b><tt>" + player[player_Pointer].getResourceD() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointD() + ")";
-            if (player_Pointer == 0) {
-                textView_Player_Total_Res[0].setText(String.valueOf(player[0].getTotal_Need_Point()));
-                textView_Player_Score[0].setText(String.format("%s/%s", player[0].getPlayer_Score(), WIN_SCORE));
-                textView_Player1_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player1_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player1_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player1_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 1) {
-                textView_Player_Total_Res[1].setText(String.valueOf(player[1].getTotal_Need_Point()));
-                textView_Player_Score[1].setText(String.format("%s/%s", player[1].getPlayer_Score(), WIN_SCORE));
-                textView_Player2_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player2_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player2_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player2_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 2) {
-                textView_Player_Total_Res[2].setText(String.valueOf(player[2].getTotal_Need_Point()));
-                textView_Player_Score[2].setText(String.format("%s/%s", player[2].getPlayer_Score(), WIN_SCORE));
-                textView_Player3_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player3_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player3_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player3_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            } else if (player_Pointer == 3) {
-                textView_Player_Total_Res[3].setText(String.valueOf(player[3].getTotal_Need_Point()));
-                textView_Player_Score[3].setText(String.format("%s/%s", player[3].getPlayer_Score(), WIN_SCORE));
-                textView_Player4_A_resource.setText(Html.fromHtml(update_Player_ResourceA));
-                textView_Player4_B_resource.setText(Html.fromHtml(update_Player_ResourceB));
-                textView_Player4_C_resource.setText(Html.fromHtml(update_Player_ResourceC));
-                textView_Player4_D_resource.setText(Html.fromHtml(update_Player_ResourceD));
-            }
+
+            textView_Player_Total_Res[player_Pointer].setText(String.valueOf(player[player_Pointer].getTotal_Need_Point()));
+            textView_Player_Score[player_Pointer].setText(String.format("%s/%s", player[player_Pointer].getPlayer_Score(), WIN_SCORE));
+            textView_Player_A_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceA));
+            textView_Player_B_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceB));
+            textView_Player_C_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceC));
+            textView_Player_D_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceD));
+
             //將被拿取位置的卡片補上新抽的卡片
             if (card_Taken_No != -1) {
                 //從洗好的牌堆中，將第 deck_Index 中的卡片圖示拿出
@@ -972,11 +920,22 @@ public class MainActivity extends AppCompatActivity {
     };
 */
 
+    public void whoWin(){
+        //檢查玩家勝利
+        for (int i = 0; i < PLAYER_NUM; i++)
+            if ((new gameMethod()).is_Win(player[i].getPlayer_Score())) {
+                Intent intent = new Intent(this, gameOverActivity.class);
+                intent.putExtra("winner", player[i].getPlayer_Name());
+                this.finish();
+                startActivity(intent);
+            }
+    }
 
     //String status_type[] = {"Welcome!","player"};
 private class MyBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        String hint_msg="";
         String mAction = intent.getAction();
         assert mAction != null;
         /**接收來自server回傳之訊息*/
@@ -1000,6 +959,8 @@ private class MyBroadcast extends BroadcastReceiver {
                     Log.d("do",tokens[0]);
                     for(int i = 0;i<tokens.length-2;i++){
                         player[i].setPlayer_Name(tokens[i+2]);
+                        player[i].setPlayer_seq_num(i);
+
                         textView_Player_Name[i].setText(player[i].getPlayer_Name());
                     }
                     if(current_player_counter == PLAYER_NUM){
@@ -1015,11 +976,205 @@ private class MyBroadcast extends BroadcastReceiver {
                         random_Deck[i] = Integer.parseInt(tokens[i+1]);
                     }
                     myDeck.shuffle_Deck(random_Deck);
+
+                    for(int i = 0 ;i< FLIP_CARD_NUM ;i++){
+                        deck_Counter_Value--;
+                    }
+
+                    //牌面初始化
+                    for(int i = 0 ; i< 4 ;i++){
+                        //從洗好的牌堆中，將第 0~3 中的卡片圖示拿出
+                        int imageResource = getResources().getIdentifier((myDeck.getCards().get(i)).getCard_Picture(), null, getPackageName());
+                        flip_Card[i].setImageResource(imageResource);
+                        //將卡片數值提示文字設定在卡片可拿取位置
+                        textView_Flip_Card[i].setText((myDeck.getCards().get(i)).getFood_Name());
+                        //卡片可拿取位置設定從牌堆中拿取的新卡片
+                        deck_Pointer[i] = i;
+                        //deck_Index指向牌堆中的下一張卡片
+                        deck_Index++;
+                    }
+                    deck_Counter.setText("x"+String.valueOf(deck_Counter_Value));
+                    exec.execute(() -> tcpClient.send("whoFirst"));
+                }
+                else if(tokens[0].equals("whoFirst")){
+                    show_hint(player[Integer.parseInt(tokens[1])].getPlayer_Name() + " first!");
+                    player_Pointer = Integer.parseInt(tokens[1]);
+
+                    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);//初始玩家標記為紅色
+
+                    hint_msg = String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name());
+                    //show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                    Log.d("whoFirst",tokens[1]+hint_msg);
+                }
+                else if(tokens[0].equals("token")){
+                    for(int i = 0;i<RESOURCE_NUM;i++){
+                        coin_Limit[i] = Integer.parseInt(tokens[i+1]);//可拿取的消耗籌碼數量
+                        textView_coin[i].setText(String.valueOf(coin_Limit[i]));//更新介面上可拿取的消耗籌碼數量
+                    }
+                    //將拿取的籌碼數紀錄，數量為 (原本手上數量 + 本回合拿取數量)
+                    player[player_Pointer].setNeed_PointA(Integer.parseInt(tokens[5]));
+                    player[player_Pointer].setNeed_PointB(Integer.parseInt(tokens[6]));
+                    player[player_Pointer].setNeed_PointC(Integer.parseInt(tokens[7]));
+                    player[player_Pointer].setNeed_PointD(Integer.parseInt(tokens[8]));
+
+                    //更新介面上玩家資源的消耗籌碼數量
+                    String update_Player_ResourceA = "<b><tt>" + player[player_Pointer].getResourceA() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointA() + ")";
+                    String update_Player_ResourceB = "<b><tt>" + player[player_Pointer].getResourceB() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointB() + ")";
+                    String update_Player_ResourceC = "<b><tt>" + player[player_Pointer].getResourceC() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointC() + ")";
+                    String update_Player_ResourceD = "<b><tt>" + player[player_Pointer].getResourceD() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointD() + ")";
+
+                    textView_Player_Total_Res[player_Pointer].setText(String.valueOf(player[player_Pointer].getTotal_Need_Point()));
+                    textView_Player_Score[player_Pointer].setText(String.format("%s/%s", player[player_Pointer].getPlayer_Score(), WIN_SCORE));
+                    textView_Player_A_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceA));
+                    textView_Player_B_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceB));
+                    textView_Player_C_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceC));
+                    textView_Player_D_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceD));
+
+                    //將本回合被拿取的籌碼堆更新數量
+                    for (int i = 0; i < 4; i++) {
+                        if (need_Coin_Taken[i] > 0) {
+                            //coin_Limit[i] -=need_Coin_Taken[i];
+                            textView_coin[i].setText(String.valueOf(coin_Limit[i]));
+                        }
+                    }
+
+
+
+                    player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
+                    System.out.println("turn to: player " + String.valueOf(player_Pointer));
+                    for (int i = 0; i < 4; i++)
+                        textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
+                    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
+                    show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                    hint_msg = String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name());
+                }
+                else if(tokens[0].equals("card")){
+                    card_Taken_No = Integer.parseInt(tokens[1]);
+                    //更新玩家手中的消耗籌碼
+                    //如果手中的永久籌碼數量少於要消耗掉的籌碼，減少玩家手中的消耗籌碼，並將消耗籌碼歸還且更新介面
+                    if (player[player_Pointer].getPermanent_PointA() < (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointA()) {
+                        player[player_Pointer].setNeed_PointA(player[player_Pointer].getNeed_PointA() - ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointA() - player[player_Pointer].getPermanent_PointA()));
+                        //將玩家歸還的籌碼A加回籌碼堆
+                        coin_Limit[0] += ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointA() - player[player_Pointer].getPermanent_PointA());
+                        textView_coin[0].setText(String.valueOf(coin_Limit[0]));
+                    }
+                    if (player[player_Pointer].getPermanent_PointB() < (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointB()) {
+                        player[player_Pointer].setNeed_PointB(player[player_Pointer].getNeed_PointB() - ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointB() - player[player_Pointer].getPermanent_PointB()));
+                        //將玩家歸還的籌碼B加回籌碼堆
+                        coin_Limit[1] += ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointB() - player[player_Pointer].getPermanent_PointB());
+                        textView_coin[1].setText(String.valueOf(coin_Limit[1]));
+
+                    }
+                    if (player[player_Pointer].getPermanent_PointC() < (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointC()) {
+                        player[player_Pointer].setNeed_PointC(player[player_Pointer].getNeed_PointC() - ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointC() - player[player_Pointer].getPermanent_PointC()));
+                        //將玩家歸還的籌碼C加回籌碼堆
+                        coin_Limit[2] += ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointC() - player[player_Pointer].getPermanent_PointC());
+                        textView_coin[2].setText(String.valueOf(coin_Limit[2]));
+                    }
+                    if (player[player_Pointer].getPermanent_PointD() < (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointD()) {
+                        player[player_Pointer].setNeed_PointD(player[player_Pointer].getNeed_PointD() - ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointD() - player[player_Pointer].getPermanent_PointD()));
+                        //將玩家歸還的籌碼D加回籌碼堆
+                        coin_Limit[3] += ((myDeck.getCards().get(deck_Pointer[card_Taken_No])).getNeed_PointD() - player[player_Pointer].getPermanent_PointD());
+                        textView_coin[3].setText(String.valueOf(coin_Limit[3]));
+                    }
+
+                    //更新獲取的永久籌碼，以及分數
+                    player[player_Pointer].setPermanent_PointA(player[player_Pointer].getPermanent_PointA() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointA());
+                    player[player_Pointer].setPermanent_PointB(player[player_Pointer].getPermanent_PointB() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointB());
+                    player[player_Pointer].setPermanent_PointC(player[player_Pointer].getPermanent_PointC() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointC());
+                    player[player_Pointer].setPermanent_PointD(player[player_Pointer].getPermanent_PointD() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getPermanent_PointD());
+                    player[player_Pointer].setPlayer_Score(player[player_Pointer].getPlayer_Score() + (myDeck.getCards().get(deck_Pointer[card_Taken_No])).getCard_Score());
+
+
+
+                    //更新介面上玩家資源的消耗籌碼數量
+                    String update_Player_ResourceA = "<b><tt>" + player[player_Pointer].getResourceA() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointA() + ")";
+                    String update_Player_ResourceB = "<b><tt>" + player[player_Pointer].getResourceB() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointB() + ")";
+                    String update_Player_ResourceC = "<b><tt>" + player[player_Pointer].getResourceC() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointC() + ")";
+                    String update_Player_ResourceD = "<b><tt>" + player[player_Pointer].getResourceD() + "</tt></b>" + "(+" + player[player_Pointer].getPermanent_PointD() + ")";
+
+                    textView_Player_Total_Res[player_Pointer].setText(String.valueOf(player[player_Pointer].getTotal_Need_Point()));
+                    textView_Player_Score[player_Pointer].setText(String.format("%s/%s", player[player_Pointer].getPlayer_Score(), WIN_SCORE));
+                    textView_Player_A_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceA));
+                    textView_Player_B_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceB));
+                    textView_Player_C_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceC));
+                    textView_Player_D_resource[player_Pointer].setText(Html.fromHtml(update_Player_ResourceD));
+
+                    //將被拿取位置的卡片補上新抽的卡片
+                    if (card_Taken_No != -1) {
+                        //從洗好的牌堆中，將第 deck_Index 中的卡片圖示拿出
+                        int imageResource = getResources().getIdentifier((myDeck.getCards().get(deck_Index)).getCard_Picture(), null, getPackageName());
+                        flip_Card[card_Taken_No].setImageResource(imageResource);
+                        //將卡片數值提示文字設定在卡片被拿取位置
+                        textView_Flip_Card[card_Taken_No].setText((myDeck.getCards().get(deck_Index)).getFood_Name());
+                        //卡片被拿取位置設定從牌堆中拿取的新卡片
+                        deck_Pointer[card_Taken_No] = deck_Index;
+                        //減少牌堆總數並更新介面
+                        deck_Counter_Value--;
+                        deck_Counter.setText("x" + String.valueOf(deck_Counter_Value));
+                        //deck_Index指向牌堆中的下一張卡片
+                        deck_Index++;
+
+                        // 將介面上，手中拿取的卡片圖案更新為空白
+                        int imageResource2 = getResources().getIdentifier("@mipmap/c_null", null, getPackageName());
+                        button_Chosen_Card.setImageResource(imageResource2);
+                    }
+
+
+
+                    card_Taken_No = -1;//將拿去的卡片初始化
+
+                    // 將介面上，手中拿去的消耗籌碼圖案更新為空白
+                    int imageResource = getResources().getIdentifier("@mipmap/coin_null", null, getPackageName());
+                    for (int i = 0; i < 3; i++) {
+                        button_Hand[i].setImageResource(imageResource);
+                    }
+
+                    //將本回合被拿取的籌碼堆更新數量
+                    for (int i = 0; i < 4; i++) {
+                        if (need_Coin_Taken[i] > 0) {
+                            //coin_Limit[i] -=need_Coin_Taken[i];
+                            textView_coin[i].setText(String.valueOf(coin_Limit[i]));
+                        }
+                    }
+                    coin_Taken_Counter = 0;//拿取得消耗籌碼總數歸零
+
+                    //將本回合拿取的消耗籌碼數歸零
+                    for (int i = 0; i < 4; i++) {
+                        need_Coin_Taken[i] = 0;
+                    }
+
+                    //檢查玩家勝利
+                    for (int i = 0; i < PLAYER_NUM; i++)
+                        if ((new gameMethod()).is_Win(player[i].getPlayer_Score())) {
+                            whoWin();
+                        }
+
+
+                    player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
+                    System.out.println("turn to: player " + String.valueOf(player_Pointer));
+                    for (int i = 0; i < 4; i++)
+                        textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
+                    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
+                    show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                    textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+
+                }
+                else{
+                    player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
+                    System.out.println("turn to: player " + String.valueOf(player_Pointer));
+                    for (int i = 0; i < 4; i++)
+                        textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
+                    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
+                    show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                    textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
                 }
                 //byte[] bytes = intent.getByteArrayExtra(TCPClient.RECEIVE_BYTES);
                 stringBuffer.append("收到： ").append(msg).append("\n");
-                textView_hint_message.setText(stringBuffer);
 
+                //textView_hint_message.setText(stringBuffer);
+                textView_hint_message.setText(hint_msg);
 
                 break;
 
