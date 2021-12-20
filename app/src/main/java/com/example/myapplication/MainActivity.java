@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     TCPClient tcpClient;
     String send_Msg;
     int current_player_counter = 0;
+    int my_Seq = 0;
     //------------
 
     @Override
@@ -362,125 +363,129 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void on_flip_Card0_Clicked(View ImageButton){
-        if(MY_DEBUG){
-            action_hint(0);
-        }
-
-        //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
-        boolean card_Available =(myDeck.getCards().get(deck_Pointer[0])).card_Is_Available(player[player_Pointer].getResourceA(), player[player_Pointer].getResourceB(), player[player_Pointer].getResourceC(), player[player_Pointer].getResourceD());
-        if(coin_Taken_Counter<=0 && card_Taken_No == -1 && card_Available) {
-            if (card_Available) {
-                //更新拿取的卡片樣式
-                int imageResource = getResources().getIdentifier("@mipmap/" + (myDeck.getCards().get(deck_Pointer[0])).getCard_Name(), null, getPackageName());
-                button_Chosen_Card.setImageResource(imageResource);
-                card_Taken_No = 0;
-
-                //將被拿去的卡片圖示清空
-                int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
-                flip_Card[0].setImageResource(imageResource2);
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            if (MY_DEBUG) {
+                action_hint(0);
             }
-        }
-        else{
-            if(card_Taken_No != -1)
-                show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Taken_Counter >0)
-                show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(!card_Available)
-                show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
+
+            //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
+            boolean card_Available = (myDeck.getCards().get(deck_Pointer[0])).card_Is_Available(player[player_Pointer].getResourceA(), player[player_Pointer].getResourceB(), player[player_Pointer].getResourceC(), player[player_Pointer].getResourceD());
+            if (coin_Taken_Counter <= 0 && card_Taken_No == -1 && card_Available) {
+                if (card_Available) {
+                    //更新拿取的卡片樣式
+                    int imageResource = getResources().getIdentifier("@mipmap/" + (myDeck.getCards().get(deck_Pointer[0])).getCard_Name(), null, getPackageName());
+                    button_Chosen_Card.setImageResource(imageResource);
+                    card_Taken_No = 0;
+
+                    //將被拿去的卡片圖示清空
+                    int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
+                    flip_Card[0].setImageResource(imageResource2);
+                }
+            } else {
+                if (card_Taken_No != -1)
+                    show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter > 0)
+                    show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (!card_Available)
+                    show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
                 //textView_hint_message.setText("您的資源不足以購買該卡片");
+            }
         }
 
     }
     public void on_flip_Card1_Clicked(View ImageButton){
-        if(MY_DEBUG){
-            action_hint(1);
-        }
-        //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
-        boolean card_Available =(myDeck.getCards().get(deck_Pointer[1])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
-        if(coin_Taken_Counter<=0 && card_Taken_No == -1 && card_Available){
-            if(card_Available){
-                //更新拿取的卡片樣式
-                int imageResource = getResources().getIdentifier("@mipmap/"+(myDeck.getCards().get(deck_Pointer[1])).getCard_Name(), null, getPackageName());
-                button_Chosen_Card.setImageResource(imageResource);
-                card_Taken_No = 1;
-
-                //將被拿去的卡片圖示清空
-                int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
-                flip_Card[1].setImageResource(imageResource2);
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            if (MY_DEBUG) {
+                action_hint(1);
             }
-        }
-        else{
-            if(card_Taken_No != -1)
-                show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Taken_Counter >0)
-                show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(!card_Available)
-                show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
-            //textView_hint_message.setText("您的資源不足以購買該卡片");
+            //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
+            boolean card_Available = (myDeck.getCards().get(deck_Pointer[1])).card_Is_Available(player[player_Pointer].getResourceA(), player[player_Pointer].getResourceB(), player[player_Pointer].getResourceC(), player[player_Pointer].getResourceD());
+            if (coin_Taken_Counter <= 0 && card_Taken_No == -1 && card_Available) {
+                if (card_Available) {
+                    //更新拿取的卡片樣式
+                    int imageResource = getResources().getIdentifier("@mipmap/" + (myDeck.getCards().get(deck_Pointer[1])).getCard_Name(), null, getPackageName());
+                    button_Chosen_Card.setImageResource(imageResource);
+                    card_Taken_No = 1;
+
+                    //將被拿去的卡片圖示清空
+                    int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
+                    flip_Card[1].setImageResource(imageResource2);
+                }
+            } else {
+                if (card_Taken_No != -1)
+                    show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter > 0)
+                    show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (!card_Available)
+                    show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
+                //textView_hint_message.setText("您的資源不足以購買該卡片");
+            }
         }
     }
     public void on_flip_Card2_Clicked(View ImageButton){
-        if(MY_DEBUG){
-            action_hint(2);
-        }
-        //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
-        boolean card_Available =(myDeck.getCards().get(deck_Pointer[2])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
-        if(coin_Taken_Counter<=0 && card_Taken_No == -1 && card_Available){
-            if(card_Available){
-                //更新拿取的卡片樣式
-                int imageResource = getResources().getIdentifier("@mipmap/"+(myDeck.getCards().get(deck_Pointer[2])).getCard_Name(), null, getPackageName());
-                button_Chosen_Card.setImageResource(imageResource);
-                card_Taken_No = 2;
-
-                //將被拿去的卡片圖示清空
-                int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
-                flip_Card[2].setImageResource(imageResource2);
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            if (MY_DEBUG) {
+                action_hint(2);
             }
-        }
-        else{
-            if(card_Taken_No != -1)
-                show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Taken_Counter >0)
-                show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(!card_Available)
-                show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
-            //textView_hint_message.setText("您的資源不足以購買該卡片");
+            //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
+            boolean card_Available = (myDeck.getCards().get(deck_Pointer[2])).card_Is_Available(player[player_Pointer].getResourceA(), player[player_Pointer].getResourceB(), player[player_Pointer].getResourceC(), player[player_Pointer].getResourceD());
+            if (coin_Taken_Counter <= 0 && card_Taken_No == -1 && card_Available) {
+                if (card_Available) {
+                    //更新拿取的卡片樣式
+                    int imageResource = getResources().getIdentifier("@mipmap/" + (myDeck.getCards().get(deck_Pointer[2])).getCard_Name(), null, getPackageName());
+                    button_Chosen_Card.setImageResource(imageResource);
+                    card_Taken_No = 2;
+
+                    //將被拿去的卡片圖示清空
+                    int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
+                    flip_Card[2].setImageResource(imageResource2);
+                }
+            } else {
+                if (card_Taken_No != -1)
+                    show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter > 0)
+                    show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (!card_Available)
+                    show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
+                //textView_hint_message.setText("您的資源不足以購買該卡片");
+            }
         }
     }
     public void on_flip_Card3_Clicked(View ImageButton){
-        if(MY_DEBUG){
-            action_hint(3);
-        }
-        //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
-        boolean card_Available = (myDeck.getCards().get(deck_Pointer[3])).card_Is_Available(player[player_Pointer].getResourceA(),player[player_Pointer].getResourceB(),player[player_Pointer].getResourceC(),player[player_Pointer].getResourceD());
-        if(coin_Taken_Counter<=0 && card_Taken_No == -1 && card_Available){
-            if(card_Available){
-                //更新拿取的卡片樣式
-                int imageResource = getResources().getIdentifier("@mipmap/"+(myDeck.getCards().get(deck_Pointer[3])).getCard_Name(), null, getPackageName());
-                button_Chosen_Card.setImageResource(imageResource);
-                card_Taken_No = 3;
-
-                //將被拿去的卡片圖示清空
-                int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
-                flip_Card[3].setImageResource(imageResource2);
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            if (MY_DEBUG) {
+                action_hint(3);
             }
-        }
-        else{
-            if(card_Taken_No != -1)
-                show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Taken_Counter >0)
-                show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-                //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
-            else if(!card_Available)
-                show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
-            //textView_hint_message.setText("您的資源不足以購買該卡片");
+            //如果拿了籌碼，不能拿牌，且拿牌後不能拿其他牌
+            boolean card_Available = (myDeck.getCards().get(deck_Pointer[3])).card_Is_Available(player[player_Pointer].getResourceA(), player[player_Pointer].getResourceB(), player[player_Pointer].getResourceC(), player[player_Pointer].getResourceD());
+            if (coin_Taken_Counter <= 0 && card_Taken_No == -1 && card_Available) {
+                if (card_Available) {
+                    //更新拿取的卡片樣式
+                    int imageResource = getResources().getIdentifier("@mipmap/" + (myDeck.getCards().get(deck_Pointer[3])).getCard_Name(), null, getPackageName());
+                    button_Chosen_Card.setImageResource(imageResource);
+                    card_Taken_No = 3;
+
+                    //將被拿去的卡片圖示清空
+                    int imageResource2 = getResources().getIdentifier("@mipmap/c_null2", null, getPackageName());
+                    flip_Card[3].setImageResource(imageResource2);
+                }
+            } else {
+                if (card_Taken_No != -1)
+                    show_hint(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已拿取卡片，無法於本回合再次拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter > 0)
+                    show_hint(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                    //textView_hint_message.setText(String.format("由於玩家 %s 您已選擇拿取籌碼，無法於本回合拿取卡片", player[player_Pointer].getPlayer_Name()));
+                else if (!card_Available)
+                    show_hint(String.format("玩家 %s 您資源不足以購買該卡片", player[player_Pointer].getPlayer_Name()));
+                //textView_hint_message.setText("您的資源不足以購買該卡片");
+            }
         }
     }
 
@@ -490,10 +495,11 @@ public class MainActivity extends AppCompatActivity {
 
     //取消耗籌碼A
     public void on_button_coinA_Clicked(View ImageButton){
-        int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"A",coin_Limit[0]);//檢查玩家預計拿的籌碼是否正常
-        //如果沒拿卡片，且籌碼堆還有消耗籌碼A，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼A
-        if (card_Taken_No == -1 && coin_Limit[0]>0 &&  player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[0]<2 && (valid_Taken==0) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
+            int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0], need_Coin_Taken[1], need_Coin_Taken[2], need_Coin_Taken[3], "A", coin_Limit[0]);//檢查玩家預計拿的籌碼是否正常
+            //如果沒拿卡片，且籌碼堆還有消耗籌碼A，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼A
+            if (card_Taken_No == -1 && coin_Limit[0] > 0 && player_Resource < PLAYER_RESOURCE_MAX && need_Coin_Taken[0] < 2 && (valid_Taken == 0) && coin_Taken_Counter < RESOURCE_TAKEN_MAX) {
                 int imageResource = getResources().getIdentifier("@mipmap/coin_a", null, getPackageName());
                 button_Hand[coin_Taken_Counter].setImageResource(imageResource);
                 coin_Taken_Counter++;//紀錄可拿的消耗籌碼數量
@@ -501,147 +507,150 @@ public class MainActivity extends AppCompatActivity {
                 coin_Limit[0]--;//減少可拿取的消耗籌碼A數量
                 textView_coin[0].setText(String.valueOf(coin_Limit[0]));//更新介面上可拿取的消耗籌碼A數量
 
-        }
-        else{
-            String msg = "0";
-            if(card_Taken_No != -1)
-                msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Limit[0]<=0)
-                msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( player_Resource >= PLAYER_RESOURCE_MAX )
-                msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( coin_Taken_Counter>=RESOURCE_TAKEN_MAX )
-                msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(need_Coin_Taken[0]>=2)
-                msg = ("該籌碼堆僅能同時拿取 2 個");
-            else if( valid_Taken == 1 )
-                msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
-            else if( valid_Taken == 2)
-                msg = ("您不能拿取 2 個相同的籌碼");
-            else if(valid_Taken == 3)
-                msg = ("該籌碼堆不足 4 個，無法再次拿取");
-            //更新介面提示文字
-            show_hint(msg);
-            //textView_hint_message.setText(msg);
+            } else {
+                String msg = "0";
+                if (card_Taken_No != -1)
+                    msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Limit[0] <= 0)
+                    msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (player_Resource >= PLAYER_RESOURCE_MAX)
+                    msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter >= RESOURCE_TAKEN_MAX)
+                    msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (need_Coin_Taken[0] >= 2)
+                    msg = ("該籌碼堆僅能同時拿取 2 個");
+                else if (valid_Taken == 1)
+                    msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
+                else if (valid_Taken == 2)
+                    msg = ("您不能拿取 2 個相同的籌碼");
+                else if (valid_Taken == 3)
+                    msg = ("該籌碼堆不足 4 個，無法再次拿取");
+                //更新介面提示文字
+                show_hint(msg);
+                //textView_hint_message.setText(msg);
 
+            }
         }
     }
     //取籌碼B
     public void on_button_coinB_Clicked(View ImageButton){
-        int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"B",coin_Limit[1]);//檢查玩家預計拿的籌碼是否正常
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
+            int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0], need_Coin_Taken[1], need_Coin_Taken[2], need_Coin_Taken[3], "B", coin_Limit[1]);//檢查玩家預計拿的籌碼是否正常
 
-        //如果沒拿卡片，且籌碼堆還有消耗籌碼B，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼B
-        if (card_Taken_No == -1 && coin_Limit[1]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[1]<2 && (valid_Taken == 0 ) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
+            //如果沒拿卡片，且籌碼堆還有消耗籌碼B，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼B
+            if (card_Taken_No == -1 && coin_Limit[1] > 0 && player_Resource < PLAYER_RESOURCE_MAX && need_Coin_Taken[1] < 2 && (valid_Taken == 0) && coin_Taken_Counter < RESOURCE_TAKEN_MAX) {
                 int imageResource = getResources().getIdentifier("@mipmap/coin_b", null, getPackageName());
                 button_Hand[coin_Taken_Counter].setImageResource(imageResource);
                 coin_Taken_Counter++;//紀錄可拿的消耗籌碼數量
                 need_Coin_Taken[1]++;//紀錄消耗籌碼B的拿取數量
                 coin_Limit[1]--;//減少可拿取的消耗籌碼B數量
                 textView_coin[1].setText(String.valueOf(coin_Limit[1]));//更新介面上可拿取的消耗籌碼B數量
-        }
-        else{
-            String msg = "0";
-            if(card_Taken_No != -1)
-                msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Limit[1]<=0)
-                msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( player_Resource>= PLAYER_RESOURCE_MAX )
-                msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( coin_Taken_Counter>=RESOURCE_TAKEN_MAX )
-                msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(need_Coin_Taken[1]>=2)
-                msg = ("該籌碼堆僅能同時拿取 2 個");
-            else if( valid_Taken == 1 )
-                msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
-            else if( valid_Taken == 2)
-                msg = ("您不能拿取 2 個相同的籌碼");
-            else if(valid_Taken == 3)
-                msg = ("該籌碼堆不足 4 個，無法再次拿取");
-            //更新介面提示文字
-            show_hint(msg);
-            //textView_hint_message.setText(msg);
+            } else {
+                String msg = "0";
+                if (card_Taken_No != -1)
+                    msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Limit[1] <= 0)
+                    msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (player_Resource >= PLAYER_RESOURCE_MAX)
+                    msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter >= RESOURCE_TAKEN_MAX)
+                    msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (need_Coin_Taken[1] >= 2)
+                    msg = ("該籌碼堆僅能同時拿取 2 個");
+                else if (valid_Taken == 1)
+                    msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
+                else if (valid_Taken == 2)
+                    msg = ("您不能拿取 2 個相同的籌碼");
+                else if (valid_Taken == 3)
+                    msg = ("該籌碼堆不足 4 個，無法再次拿取");
+                //更新介面提示文字
+                show_hint(msg);
+                //textView_hint_message.setText(msg);
+            }
         }
     }
     //取籌碼C
     public void on_button_coinC_Clicked(View ImageButton){
-        int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"C",coin_Limit[2]);//檢查玩家預計拿的籌碼是否正常
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
+            int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0], need_Coin_Taken[1], need_Coin_Taken[2], need_Coin_Taken[3], "C", coin_Limit[2]);//檢查玩家預計拿的籌碼是否正常
 
-        //如果沒拿卡片，且籌碼堆還有消耗籌碼C，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼C
-        if (card_Taken_No == -1 && coin_Limit[2]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[2]<2 && (valid_Taken == 0) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
+            //如果沒拿卡片，且籌碼堆還有消耗籌碼C，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿消耗籌碼C
+            if (card_Taken_No == -1 && coin_Limit[2] > 0 && player_Resource < PLAYER_RESOURCE_MAX && need_Coin_Taken[2] < 2 && (valid_Taken == 0) && coin_Taken_Counter < RESOURCE_TAKEN_MAX) {
                 int imageResource = getResources().getIdentifier("@mipmap/coin_c", null, getPackageName());
                 button_Hand[coin_Taken_Counter].setImageResource(imageResource);
                 coin_Taken_Counter++;//紀錄可拿的消耗籌碼數量
                 need_Coin_Taken[2]++;//紀錄消耗籌碼C的拿取數量
                 coin_Limit[2]--;//減少可拿取的消耗籌碼C數量
                 textView_coin[2].setText(String.valueOf(coin_Limit[2]));//更新介面上可拿取的消耗籌碼C數量
-        }
-        else{
-            String msg = "0";
-            if(card_Taken_No != -1)
-                msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Limit[2]<=0)
-                msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(player_Resource >= PLAYER_RESOURCE_MAX )
-                msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( coin_Taken_Counter>=RESOURCE_TAKEN_MAX )
-                msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(need_Coin_Taken[2]>=2)
-                msg = ("該籌碼堆僅能同時拿取 2 個");
-            else if( valid_Taken == 1 )
-                msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
-            else if( valid_Taken == 2)
-                msg = ("您不能拿取 2 個相同的籌碼");
-            else if(valid_Taken == 3)
-                msg = ("該籌碼堆不足 4 個，無法再次拿取");
-            //更新介面提示文字
-            show_hint(msg);
-            //textView_hint_message.setText(msg);
+            } else {
+                String msg = "0";
+                if (card_Taken_No != -1)
+                    msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Limit[2] <= 0)
+                    msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (player_Resource >= PLAYER_RESOURCE_MAX)
+                    msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter >= RESOURCE_TAKEN_MAX)
+                    msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (need_Coin_Taken[2] >= 2)
+                    msg = ("該籌碼堆僅能同時拿取 2 個");
+                else if (valid_Taken == 1)
+                    msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
+                else if (valid_Taken == 2)
+                    msg = ("您不能拿取 2 個相同的籌碼");
+                else if (valid_Taken == 3)
+                    msg = ("該籌碼堆不足 4 個，無法再次拿取");
+                //更新介面提示文字
+                show_hint(msg);
+                //textView_hint_message.setText(msg);
+            }
         }
     }
     //取籌碼D
     public void on_button_coinD_Clicked(View ImageButton){
-        int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
-        int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0],need_Coin_Taken[1],need_Coin_Taken[2],need_Coin_Taken[3],"D",coin_Limit[3]);//檢查玩家預計拿的籌碼是否正常
+        if((player_Pointer == my_Seq)||current_mode.equals(single_mode)) {
+            int player_Resource = ((player[player_Pointer].getTotal_Need_Point() + coin_Taken_Counter));//玩家手上的資源 + 預計拿取的消耗籌碼數量
+            int valid_Taken = (new gameMethod()).is_Over_Once_Resource_Max(need_Coin_Taken[0], need_Coin_Taken[1], need_Coin_Taken[2], need_Coin_Taken[3], "D", coin_Limit[3]);//檢查玩家預計拿的籌碼是否正常
 
-        //如果沒拿卡片，且籌碼堆還有消耗籌碼D，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿籌碼
-        if (card_Taken_No == -1 && coin_Limit[3]>0 && player_Resource < PLAYER_RESOURCE_MAX  && need_Coin_Taken[3]<2 && (valid_Taken == 0 ) && coin_Taken_Counter<RESOURCE_TAKEN_MAX){
+            //如果沒拿卡片，且籌碼堆還有消耗籌碼D，且玩家手上沒超出上限，且該籌碼沒拿超過2個，且拿了2個相同籌碼不能再拿其他資源，可以拿籌碼
+            if (card_Taken_No == -1 && coin_Limit[3] > 0 && player_Resource < PLAYER_RESOURCE_MAX && need_Coin_Taken[3] < 2 && (valid_Taken == 0) && coin_Taken_Counter < RESOURCE_TAKEN_MAX) {
                 int imageResource = getResources().getIdentifier("@mipmap/coin_d", null, getPackageName());
                 button_Hand[coin_Taken_Counter].setImageResource(imageResource);
                 coin_Taken_Counter++;//紀錄可拿的消耗籌碼數量
                 need_Coin_Taken[3]++;//紀錄消耗籌碼D的拿取數量
                 coin_Limit[3]--;//減少可拿取的消耗籌碼D數量
                 textView_coin[3].setText(String.valueOf(coin_Limit[3]));//更新介面上可拿取的消耗籌碼B數量
-        }
-        else{
-            String msg = "0";
-            if(card_Taken_No != -1)
-                msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(coin_Limit[3]<=0)
-                msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( player_Resource >= PLAYER_RESOURCE_MAX )
-                msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if( coin_Taken_Counter>=RESOURCE_TAKEN_MAX )
-                msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
-            else if(need_Coin_Taken[3]>=2)
-                msg = ("該籌碼堆僅能同時拿取 2 個");
-            else if( valid_Taken == 1 )
-                msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
-            else if( valid_Taken == 2)
-                msg = ("您不能拿取 2 個相同的籌碼");
-            else if(valid_Taken == 3)
-                msg = ("該籌碼堆不足 4 個，無法再次拿取");
-            //更新介面提示文字
-            show_hint(msg);
-            //textView_hint_message.setText(msg);
+            } else {
+                String msg = "0";
+                if (card_Taken_No != -1)
+                    msg = (String.format("由於玩家 %s 您已選擇拿取卡片，無法於本回合拿取籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Limit[3] <= 0)
+                    msg = (String.format("由於該籌碼堆已無籌碼，玩家 %s 無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (player_Resource >= PLAYER_RESOURCE_MAX)
+                    msg = (String.format("由於玩家 %s 可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (coin_Taken_Counter >= RESOURCE_TAKEN_MAX)
+                    msg = (String.format("由於玩家 %s 本回合可拿取的籌碼已達上限，無法於本回合拿取該籌碼", player[player_Pointer].getPlayer_Name()));
+                else if (need_Coin_Taken[3] >= 2)
+                    msg = ("該籌碼堆僅能同時拿取 2 個");
+                else if (valid_Taken == 1)
+                    msg = ("您已拿取了 2 個相同的籌碼，於本回合無法再拿取該籌碼");
+                else if (valid_Taken == 2)
+                    msg = ("您不能拿取 2 個相同的籌碼");
+                else if (valid_Taken == 3)
+                    msg = ("該籌碼堆不足 4 個，無法再次拿取");
+                //更新介面提示文字
+                show_hint(msg);
+                //textView_hint_message.setText(msg);
 
+            }
         }
     }
 
-    //用來 debug 的 button
+    // ok button
     public void on_test_ButtonClicked(View button) {
-        if(current_mode.equals(multi_mode)){
+        if((player_Pointer == my_Seq)&&current_mode.equals(multi_mode)){
             send_Msg = "nothing ha ha";
             int token[]=new int[4];
             //如果是拿籌碼當作回合動作
@@ -767,13 +776,13 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-            player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
-            System.out.println("turn to: player " + String.valueOf(player_Pointer));
-            for (int i = 0; i < 4; i++)
-                textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
-            textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
-            show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
-            textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+            //player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
+            //System.out.println("turn to: player " + String.valueOf(player_Pointer));
+            //for (int i = 0; i < 4; i++)
+            //    textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
+            //textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
+            //show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+            //textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
 
 
 
@@ -949,7 +958,7 @@ private class MyBroadcast extends BroadcastReceiver {
                 }
                 if(tokens[0].equals("Welcome!")){
                     //exec.execute(() -> tcpClient.send(tcpClient.Name));
-
+                    my_Seq = Integer.parseInt(tokens[1]);
                     Log.d("do",tokens[0]);
                     exec.execute(() -> tcpClient.send("player"));
                 }
@@ -1161,16 +1170,25 @@ private class MyBroadcast extends BroadcastReceiver {
                     textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
 
                 }
-                else{
-                    player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
-                    System.out.println("turn to: player " + String.valueOf(player_Pointer));
-                    for (int i = 0; i < 4; i++)
-                        textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
-                    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
-                    show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
-                    textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
-                }
+                //else{
+                //    player_Pointer = (++player_Pointer) % PLAYER_NUM;//換下一位玩家操作
+                //    System.out.println("turn to: player " + String.valueOf(player_Pointer));
+                //    for (int i = 0; i < 4; i++)
+                //        textView_Player_Name[i].setBackgroundColor(Color.parseColor("#E6E6E6"));
+                //    textView_Player_Name[player_Pointer].setBackgroundColor(Color.RED);
+                //    show_hint(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                //    textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
+                //}
                 //byte[] bytes = intent.getByteArrayExtra(TCPClient.RECEIVE_BYTES);
+                if((player_Pointer == my_Seq)){
+                    test_Button.setEnabled(true);
+                    test_Button.setVisibility(View.VISIBLE);
+                }
+                else{
+                    test_Button.setEnabled(false);
+                    test_Button.setVisibility(View.INVISIBLE);
+                }
+
                 stringBuffer.append("收到： ").append(msg).append("\n");
 
                 //textView_hint_message.setText(stringBuffer);

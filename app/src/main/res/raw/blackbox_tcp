@@ -1,0 +1,116 @@
+package com.tcp_test;
+
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+public class client {
+    private Thread thread;
+    private Socket clientSocket;//客戶端的socket
+    private BufferedWriter bw;  //取得網路輸出串流
+    private BufferedReader br;  //取得網路輸入串流
+    //private String tmp;         //做為接收時的緩存
+    private boolean isRun;
+    public void sendstr(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = "send msg\n";
+                try {
+                    bw.write(s);
+                    bw.flush();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void send(String s){
+        //String s = "send msg\n";
+        try {
+            bw.write(s+"\n");
+            bw.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Thread getThread() {
+        thread=new Thread(Connection);
+        return thread;
+    }
+
+    //連結socket伺服器做傳送與接收
+    private Runnable Connection=new Runnable(){
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            try{
+                //輸入 Server 端的 IP
+                InetAddress serverIp = InetAddress.getByName("");
+                //InetAddress serverIp = InetAddress.getByName("10.0.2.2");
+                //自訂所使用的 Port(1024 ~ 65535)
+                int serverPort = 8888;
+                //建立連線
+                clientSocket = new Socket(serverIp, serverPort);
+                //取得網路輸出串流
+                bw = new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream()));
+                //取得網路輸入串流
+                br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                isRun=true;
+                //檢查是否已連線
+                while (clientSocket.isConnected() && isRun) {
+                    //宣告一個緩衝,從br串流讀取 Server 端傳來的訊息
+                    char[] tmp  =new char[256];
+                    int str_end = (br.read(tmp,0,100));
+                    StringBuilder filter_str = new StringBuilder();
+                    int j=0;
+                    while(tmp[j]!='\0'){
+                        //System.out.println(j+" : "+(int)tmp[j]);
+                        filter_str.append(tmp[j++]);
+                    }
+                    final String get_msg = filter_str.toString();
+                    if(j!=0)
+                        System.out.println(j+" : "+get_msg);
+                }
+            }catch(Exception e){
+                //當斷線時會跳到 catch,可以在這裡處理斷開連線後的邏輯
+                e.printStackTrace();
+                destroy();
+            }
+        }
+    };
+
+    public void destroy() {
+        //super.onDestroy();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    bw.write("exit\n");
+                    //立即發送
+                    bw.flush();
+                    //關閉輸出入串流後,關閉Socket
+                    bw.close();
+                    br.close();
+                    isRun=false;
+                    clientSocket.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+ }
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+package com.tcp_test;
+
+import java.util.Scanner;
+
+public class Main {
+    static Scanner scn=new Scanner(System.in);
+    public static void main(String[] args) {
+        boolean initial=false;
+	// write your code here
+        client cli = new client();
+        cli.getThread().start();
+        //cli.sendstr();
+        while(true){
+            System.out.print(">>> ");
+
+            String str = scn.nextLine();
+            cli.send(str);
+            if(!initial){
+                cli.send("player");
+                //cli.send("whoFirst");
+                initial =true;
+            }
+
+
+            if(str.equals("exit")){
+                //cli.send("exit");
+                cli.destroy();
+                break;
+            }
+
+
+
+
+        }
+
+    }
+}
