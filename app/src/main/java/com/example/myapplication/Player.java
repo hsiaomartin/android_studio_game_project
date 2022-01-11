@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 public class Player {
-    private int player_Score = 7;
+    private int player_Score = 0;
     private int permanent_PointA = 0;
     private int permanent_PointB = 0;
     private int permanent_PointC = 0;

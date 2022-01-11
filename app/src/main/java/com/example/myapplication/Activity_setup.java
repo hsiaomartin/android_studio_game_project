@@ -18,7 +18,7 @@ public class Activity_setup extends AppCompatActivity {
         final EditText p2= findViewById(R.id.editTextTextP2);
         final EditText p3= findViewById(R.id.editTextTextP3);
         final EditText p4= findViewById(R.id.editTextTextP4);
-
+        final EditText winScore = findViewById(R.id.editTextNumberDecimal_winScore);
         Button setup_btn = (Button) findViewById(R.id.button_setup_start);
         setup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +29,7 @@ public class Activity_setup extends AppCompatActivity {
                 intent.putExtra("player2",p2.getText().toString());
                 intent.putExtra("player3",p3.getText().toString());
                 intent.putExtra("player4",p4.getText().toString());
+                intent.putExtra("winScore",Integer.parseInt(String.valueOf(winScore.getText())));
                 startActivity(intent);
             }
         });

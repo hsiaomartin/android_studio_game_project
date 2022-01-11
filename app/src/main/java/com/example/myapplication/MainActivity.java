@@ -301,8 +301,13 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0 ;i<PLAYER_NUM;i++){
             player[i] = new Player("player "+(i+1));
             textView_Player_Score[i].setText(String.format("%s/%s", player[i].getPlayer_Score(), WIN_SCORE));
+            if(current_mode.equals(single_mode)){
+                WIN_SCORE = extras.getInt("winScore");
+                textView_Player_Score[i].setText(String.format("%s/%s", player[i].getPlayer_Score(), WIN_SCORE));
+            }
         }
         if(current_mode.equals(single_mode)){
+            //setup player name from previous activity
 
             player[0].setPlayer_Name(extras.getString("player1"));
             player[1].setPlayer_Name(extras.getString("player2"));
@@ -901,7 +906,8 @@ public class MainActivity extends AppCompatActivity {
 
             //檢查玩家勝利
             for (int i = 0; i < PLAYER_NUM; i++)
-                if ((new gameMethod()).is_Win(player[i].getPlayer_Score())) {
+                //if ((new gameMethod()).is_Win(player[i].getPlayer_Score())) {
+                if (player[i].getPlayer_Score()>=WIN_SCORE) {
                     Intent intent = new Intent(this, gameOverActivity.class);
                     intent.putExtra("winner", player[i].getPlayer_Name());
                     this.finish();

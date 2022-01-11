@@ -42,7 +42,7 @@
     <string name="deck_Text">
         剩餘的料理
     </string>
-    <string name="gameName">阿嬤買菜</string>
+    <string name="gameName">阿嬤買菜together</string>
     <string name="title_activity_game_over">gameOverActivity</string>
 </resources>
 
