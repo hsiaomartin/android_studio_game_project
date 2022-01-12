@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     String multi_mode = "multi";
     String current_mode = single_mode;
     Bundle extras;
-
+    boolean GameStart = false;
     //-遊戲參數------------
     int PLAYER_NUM=4; //玩家人數
     int FLIP_CARD_NUM = 4 ;//翻開的卡片數量
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     TCPClient tcpClient;
     String send_Msg;
     int current_player_counter = 0;
-    int my_Seq = 0;
+    int my_Seq = -1;
     //------------
 
     @Override
@@ -986,6 +986,7 @@ private class MyBroadcast extends BroadcastReceiver {
                 }
                 else if(tokens[0].equals("shuffle")){
                     show_hint("Game Start!");
+                    GameStart = true;
                     int[] random_Deck = new int[Deck.deck_Num];
                     for(int i = 0;i<random_Deck.length;i++){
                         random_Deck[i] = Integer.parseInt(tokens[i+1]);
@@ -1186,7 +1187,7 @@ private class MyBroadcast extends BroadcastReceiver {
                 //    textView_hint_message.setText(String.format("玩家 %s 的回合", player[player_Pointer].getPlayer_Name()));
                 //}
                 //byte[] bytes = intent.getByteArrayExtra(TCPClient.RECEIVE_BYTES);
-                if((player_Pointer == my_Seq)){
+                if((player_Pointer == my_Seq) && GameStart){
                     test_Button.setEnabled(true);
                     test_Button.setVisibility(View.VISIBLE);
                 }
